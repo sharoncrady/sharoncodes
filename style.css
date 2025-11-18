@@ -384,3 +384,15 @@ body {
 .resume-button:hover {
   background-color: #001a33;    /* darker hover */
 }
+
+
+
+.resume-btn,
+.resume-item a {
+    color: #38bdf8 !important;   /* same blue as your other buttons */
+}
+
+.resume-btn:visited,
+.resume-item a:visited {
+    color: #38bdf8 !important;   /* prevents purple visited color */
+}
