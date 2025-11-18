@@ -365,9 +365,9 @@ body {
   text-decoration: underline;
 }
 
-
 .resume-top-link {
-  margin-top: 10px;
+  margin-top: 10px;       /* adjust if needed */
+  margin-bottom: 40px;    /* ⬅️ INCREASE this number to move the button UP */
   text-align: center;
 }
 
