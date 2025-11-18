@@ -387,12 +387,3 @@ body {
 
 
 
-.resume-btn,
-.resume-item a {
-    color: #38bdf8 !important;   /* same blue as your other buttons */
-}
-
-.resume-btn:visited,
-.resume-item a:visited {
-    color: #38bdf8 !important;   /* prevents purple visited color */
-}
