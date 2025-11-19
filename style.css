@@ -434,17 +434,4 @@ a:hover {
     margin-bottom: 30px;
 }
 
-.resume-button {
-    background: #1e90ff;
-    color: #ffffff;
-    padding: 8px 14px;
-    border-radius: 6px;
-    text-decoration: none;
-    font-weight: 500;
-    transition: 0.3s;
-}
-
-.resume-button:hover {
-    background: #4da3ff;
-}
 
