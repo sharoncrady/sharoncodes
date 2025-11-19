@@ -412,3 +412,39 @@ a:hover {
     color: #82c0ff;
     text-decoration: underline;
 }
+
+
+/* Make all links blue instead of purple (visited) */
+a,
+a:visited,
+a:active {
+    color: #4da3ff;
+    text-decoration: none;
+}
+
+a:hover {
+    color: #82c0ff;
+    text-decoration: underline;
+}
+
+
+.resume-links {
+    display: flex;
+    gap: 12px;
+    margin-bottom: 30px;
+}
+
+.resume-button {
+    background: #1e90ff;
+    color: #ffffff;
+    padding: 8px 14px;
+    border-radius: 6px;
+    text-decoration: none;
+    font-weight: 500;
+    transition: 0.3s;
+}
+
+.resume-button:hover {
+    background: #4da3ff;
+}
+
