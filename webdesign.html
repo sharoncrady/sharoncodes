@@ -1,0 +1,531 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Web Developer – Sharon Crady</title>
+
+  <style>
+    /* ========= THEME VARIABLES ========= */
+    :root {
+      --bg: #05060a;
+      --panel: #11131a;
+      --card: #181a24;
+      --accent1: #b38cff; /* lavender */
+      --accent2: #4fd2c2; /* teal */
+      --text: #f7f7ff;
+      --muted: #b4b6c7;
+      --border: rgba(255,255,255,0.12);
+      --shadow: 0 18px 40px rgba(0,0,0,0.6);
+    }
+
+    /* Light theme defaults when system prefers light */
+    @media (prefers-color-scheme: light) {
+      :root {
+        --bg: #f7f7ff;
+        --panel: #ffffff;
+        --card: #f3f3ff;
+        --text: #14141a;
+        --muted: #5b5b73;
+        --border: rgba(0,0,0,0.08);
+        --shadow: 0 10px 28px rgba(0,0,0,0.15);
+      }
+    }
+
+    /* Explicit light override via class (for toggle) */
+    :root.light {
+      --bg: #f7f7ff;
+      --panel: #ffffff;
+      --card: #f3f3ff;
+      --text: #14141a;
+      --muted: #5b5b73;
+      --border: rgba(0,0,0,0.08);
+      --shadow: 0 10px 28px rgba(0,0,0,0.15);
+    }
+
+    /* ========= GLOBAL ========= */
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    body {
+      font-family: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+      background: radial-gradient(circle at top, #202334, var(--bg) 70%);
+      color: var(--text);
+      min-height: 100vh;
+      display: flex;
+      justify-content: center;
+      padding: 2rem 1rem;
+      transition: background 0.4s ease, color 0.4s ease;
+    }
+
+    main {
+      width: 100%;
+      max-width: 1040px;
+      background: var(--panel);
+      border-radius: 18px;
+      padding: 2.3rem 1.8rem 2.8rem;
+      border: 1px solid var(--border);
+      box-shadow: var(--shadow);
+      transition: background 0.4s ease, border 0.4s ease, box-shadow 0.4s ease;
+    }
+
+    /* ========= HEADER / HERO ========= */
+    header {
+      position: relative;
+      margin-bottom: 1.8rem;
+      display: grid;
+      grid-template-columns: minmax(0, 2.2fr) minmax(0, 1.6fr);
+      gap: 1.5rem;
+      align-items: center;
+    }
+
+    @media (max-width: 800px) {
+      header {
+        grid-template-columns: 1fr;
+      }
+    }
+
+    h1 {
+      font-size: 2rem;
+      letter-spacing: 0.03em;
+      margin-bottom: 0.45rem;
+    }
+
+    h1 span {
+      background: linear-gradient(120deg, var(--accent1), var(--accent2));
+      -webkit-background-clip: text;
+      color: transparent;
+    }
+
+    .hero-sub {
+      font-size: 0.95rem;
+      color: var(--muted);
+      max-width: 430px;
+      line-height: 1.4;
+    }
+
+    .hero-badge {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.45rem;
+      font-size: 0.78rem;
+      text-transform: uppercase;
+      letter-spacing: 0.16em;
+      color: var(--muted);
+      margin-bottom: 0.5rem;
+    }
+
+    .hero-badge span {
+      width: 7px;
+      height: 7px;
+      border-radius: 999px;
+      background: var(--accent2);
+    }
+
+    .hero-cta {
+      margin-top: 1rem;
+      display: flex;
+      flex-wrap: wrap;
+      gap: 0.7rem;
+    }
+
+    .btn-primary {
+      display: inline-block;
+      padding: 0.65rem 1.3rem;
+      border-radius: 999px;
+      border: none;
+      background: linear-gradient(115deg, var(--accent1), var(--accent2));
+      color: #05060a;
+      font-weight: 650;
+      font-size: 0.92rem;
+      text-decoration: none;
+      cursor: pointer;
+      transition: transform 0.15s ease, opacity 0.15s ease;
+    }
+
+    .btn-primary:hover {
+      transform: translateY(-1px);
+      opacity: 0.9;
+    }
+
+    .btn-ghost {
+      display: inline-block;
+      padding: 0.6rem 1.15rem;
+      border-radius: 999px;
+      border: 1px solid var(--border);
+      background: transparent;
+      color: var(--text);
+      font-size: 0.88rem;
+      text-decoration: none;
+      cursor: pointer;
+      transition: background 0.2s ease, border 0.2s ease;
+    }
+
+    .btn-ghost:hover {
+      background: rgba(255,255,255,0.05);
+      border-color: var(--accent1);
+    }
+
+    .hero-highlight {
+      font-size: 0.8rem;
+      color: var(--muted);
+      margin-top: 0.4rem;
+    }
+
+    /* ========= THEME TOGGLE ========= */
+    .theme-toggle {
+      position: absolute;
+      top: 0;
+      right: 0;
+      background: transparent;
+      border: 1px solid var(--border);
+      border-radius: 999px;
+      padding: 0.25rem 0.5rem;
+      cursor: pointer;
+      font-size: 0.9rem;
+      display: inline-flex;
+      align-items: center;
+      gap: 0.35rem;
+      color: var(--muted);
+      transition: background 0.2s ease, border 0.2s ease, color 0.4s ease;
+    }
+
+    .theme-toggle span.icon {
+      font-size: 1.15rem;
+    }
+
+    .theme-toggle:hover {
+      background: rgba(255,255,255,0.06);
+      border-color: var(--accent1);
+    }
+
+    /* ========= SECTIONS ========= */
+    .section {
+      margin-top: 1.8rem;
+    }
+
+    .section-title {
+      font-size: 0.85rem;
+      text-transform: uppercase;
+      letter-spacing: 0.18em;
+      color: var(--muted);
+      margin-bottom: 0.6rem;
+    }
+
+    .section-sub {
+      font-size: 0.86rem;
+      color: var(--muted);
+      margin-bottom: 0.7rem;
+      max-width: 520px;
+    }
+
+    .grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(230px, 1fr));
+      gap: 0.85rem;
+    }
+
+    /* ========= CARDS ========= */
+    .card {
+      background: var(--card);
+      border-radius: 13px;
+      padding: 0.9rem 1rem;
+      border: 1px solid var(--border);
+      transition: transform 0.15s ease, border-color 0.2s ease, background 0.4s ease;
+    }
+
+    .card:hover {
+      transform: translateY(-2px);
+      border-color: var(--accent1);
+    }
+
+    .card-label {
+      font-size: 0.76rem;
+      text-transform: uppercase;
+      letter-spacing: 0.14em;
+      color: var(--accent2);
+      margin-bottom: 0.25rem;
+    }
+
+    .card-title {
+      font-size: 0.98rem;
+      font-weight: 600;
+      margin-bottom: 0.2rem;
+    }
+
+    .card-text {
+      font-size: 0.82rem;
+      line-height: 1.33;
+      color: var(--muted);
+    }
+
+    .pill-row {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 0.3rem;
+      margin-top: 0.45rem;
+    }
+
+    .pill {
+      font-size: 0.72rem;
+      padding: 0.15rem 0.6rem;
+      border-radius: 999px;
+      border: 1px solid var(--border);
+      color: var(--muted);
+    }
+
+    /* ========= FOOTER ========= */
+    footer {
+      margin-top: 2.2rem;
+      font-size: 0.75rem;
+      color: var(--muted);
+      display: flex;
+      justify-content: space-between;
+      flex-wrap: wrap;
+      gap: 0.5rem;
+    }
+  </style>
+</head>
+<body>
+  <main>
+    <header>
+      <div>
+        <div class="hero-badge">
+          <span></span>
+          WEB DEVELOPER • CUSTOM WEBSITES
+        </div>
+        <h1>
+          Custom Websites Built For You<br/>
+          by <span>Sharon&nbsp;Crady</span>
+        </h1>
+        <p class="hero-sub">
+          I build clean, modern, mobile-friendly websites using HTML, CSS and
+          simple, reliable tech. Whether you need a landing page, a small business
+          site, or a personal brand page, I can create a site that feels like you.
+        </p>
+
+        <div class="hero-cta">
+          <a href="mailto:sharoncradyq17@gmail.com" class="btn-primary">
+            ✉ Email Me About a Website
+          </a>
+          <a href="#projects" class="btn-ghost">
+            View Example Layouts
+          </a>
+        </div>
+
+        <p class="hero-highlight">
+          • Dark / light mode builds • Simple hosting options • GitHub-based workflow
+        </p>
+      </div>
+
+      <!-- theme toggle & “tech snapshot” side box -->
+      <div style="position:relative;">
+        <button class="theme-toggle" id="themeToggle" aria-label="Toggle theme">
+          <span class="icon">🌙</span>
+          <span class="label">Theme</span>
+        </button>
+
+        <div class="card" style="margin-top:2.1rem;">
+          <div class="card-label">Tech Snapshot</div>
+          <div class="card-text">
+            <strong>Stack:</strong> HTML, CSS, basic JavaScript, GitHub Pages.<br/>
+            <strong>Focus:</strong> fast-loading, easy-to-maintain websites for individuals and small businesses.
+          </div>
+        </div>
+      </div>
+    </header>
+
+    <!-- ========= WHAT I BUILD ========= -->
+    <section class="section">
+      <div class="section-title">What I Can Build For You</div>
+      <p class="section-sub">
+        Here are the types of sites I’m currently building for clients. Everything is custom-coded,
+        not drag-and-drop templates, so your site can grow and change as you do.
+      </p>
+
+      <div class="grid">
+        <article class="card">
+          <div class="card-label">Service</div>
+          <div class="card-title">Personal & Professional Landing Pages</div>
+          <p class="card-text">
+            One-page sites that introduce who you are, what you do, and how to contact you. Perfect
+            for coaches, freelancers, artists, and solo entrepreneurs.
+          </p>
+          <div class="pill-row">
+            <span class="pill">Hero section</span>
+            <span class="pill">About you</span>
+            <span class="pill">Contact button</span>
+          </div>
+        </article>
+
+        <article class="card">
+          <div class="card-label">Service</div>
+          <div class="card-title">Small Business Websites</div>
+          <p class="card-text">
+            Simple multi-section sites for local and online businesses: services, pricing,
+            testimonials, FAQ and contact. Clear layout, clean visuals, and mobile-friendly design.
+          </p>
+          <div class="pill-row">
+            <span class="pill">Services</span>
+            <span class="pill">FAQ</span>
+            <span class="pill">Map / location</span>
+          </div>
+        </article>
+
+        <article class="card">
+          <div class="card-label">Service</div>
+          <div class="card-title">Portfolio & Creative Sites</div>
+          <p class="card-text">
+            Pages that showcase your work: audio, video, writing, photos or projects. Great for
+            voiceover, music, acting, art, and content creators.
+          </p>
+          <div class="pill-row">
+            <span class="pill">Gallery sections</span>
+            <span class="pill">Embedded media</span>
+            <span class="pill">Contact links</span>
+          </div>
+        </article>
+      </div>
+    </section>
+
+    <!-- ========= SAMPLE PROJECTS ========= -->
+    <section class="section" id="projects">
+      <div class="section-title">Sample Layouts</div>
+      <p class="section-sub">
+        These are example layouts that represent the style of sites I can build. Each demo shows a
+        different structure and purpose: business, personal brand, and content.
+      </p>
+
+      <div class="grid">
+        <article class="card">
+          <div class="card-label">Demo Layout</div>
+          <div class="card-title">“Desert Light Wellness” – Business Landing Page</div>
+          <p class="card-text">
+            A calm, modern layout for a wellness or coaching business. Features a bold hero,
+            three-column services section, testimonials, and a prominent “Book a Session” button.
+          </p>
+          <div class="pill-row">
+            <span class="pill">Wellness / Coaching</span>
+            <span class="pill">One-page layout</span>
+          </div>
+        </article>
+
+        <article class="card">
+          <div class="card-label">Demo Layout</div>
+          <div class="card-title">“Skyline Stories” – Personal Brand / Portfolio</div>
+          <p class="card-text">
+            A flexible portfolio page designed for a creator: intro section, featured projects,
+            highlight reels, and a dedicated contact area. Works well for VO, music, or acting.
+          </p>
+          <div class="pill-row">
+            <span class="pill">Portfolio grid</span>
+            <span class="pill">Media-friendly</span>
+          </div>
+        </article>
+
+        <article class="card">
+          <div class="card-label">Demo Layout</div>
+          <div class="card-title">“Southwest Notes” – Simple Blog Layout</div>
+          <p class="card-text">
+            A simple blog-style layout with a clean list of posts, featured header area, and a
+            sidebar for links or categories. Ideal for journaling your journey or sharing updates.
+          </p>
+          <div class="pill-row">
+            <span class="pill">Blog style</span>
+            <span class="pill">Writing-friendly</span>
+          </div>
+        </article>
+      </div>
+    </section>
+
+    <!-- ========= TECH & APPROACH ========= -->
+    <section class="section">
+      <div class="section-title">How I Build</div>
+      <p class="section-sub">
+        My approach is simple: clear structure, readable code, and pages that load quickly and look
+        good on phones, tablets, and desktops.
+      </p>
+
+      <div class="grid">
+        <article class="card">
+          <div class="card-label">Tech Stack</div>
+          <div class="card-text">
+            <strong>Core:</strong> HTML, CSS, basic JavaScript<br/>
+            <strong>Hosting:</strong> GitHub Pages or similar simple hosting<br/>
+            <strong>Focus:</strong> Lightweight, easy to maintain, no complicated backend.
+          </div>
+        </article>
+
+        <article class="card">
+          <div class="card-label">Design Approach</div>
+          <div class="card-text">
+            I lean on clean typography, spacing, and color — not clutter. Dark / light themes and
+            simple layout options make your site feel modern without being overwhelming.
+          </div>
+        </article>
+
+        <article class="card">
+          <div class="card-label">Working Together</div>
+          <div class="card-text">
+            We’ll start with what you need your site to do: who it’s for, what you want people to
+            know, and what action you want them to take. From there, I build a simple structure and
+            refine it with you.
+          </div>
+        </article>
+      </div>
+    </section>
+
+    <!-- ========= CONTACT ========= -->
+    <section class="section">
+      <div class="section-title">Ready To Talk About Your Site?</div>
+      <p class="section-sub">
+        If you’d like to explore having me build a site for you, send me an email with a short
+        description of what you have in mind (personal, business, portfolio, etc.). We’ll take it
+        one step at a time.
+      </p>
+
+      <a href="mailto:sharoncradyq17@gmail.com" class="btn-primary">
+        ✉ Email Sharon About a Website
+      </a>
+    </section>
+
+    <footer>
+      <span>Web development by Sharon Crady.</span>
+      <span>Built with HTML, CSS &amp; a little JavaScript.</span>
+    </footer>
+  </main>
+
+  <script>
+    const root = document.documentElement;
+    const toggle = document.getElementById("themeToggle");
+    const iconSpan = toggle.querySelector(".icon");
+
+    function prefersLight() {
+      return window.matchMedia &&
+             window.matchMedia("(prefers-color-scheme: light)").matches;
+    }
+
+    function applyInitialTheme() {
+      if (root.classList.contains("light")) {
+        iconSpan.textContent = "☀️";
+      } else if (prefersLight()) {
+        // Let system preference act as light baseline
+        iconSpan.textContent = "☀️";
+      } else {
+        iconSpan.textContent = "🌙";
+      }
+    }
+
+    toggle.addEventListener("click", () => {
+      root.classList.toggle("light");
+      const isLight = root.classList.contains("light");
+      iconSpan.textContent = isLight ? "☀️" : "🌙";
+    });
+
+    applyInitialTheme();
+  </script>
+</body>
+</html>
