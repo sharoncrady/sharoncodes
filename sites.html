@@ -1,0 +1,270 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Official Sharon Crady — Sites Portal</title>
+
+  <style>
+    /* ========= BASE THEME VARIABLES ========= */
+    :root {
+      --bg: #05060a;
+      --card: #11131a;
+      --accent1: #b38cff; /* lavender */
+      --accent2: #4fd2c2; /* teal */
+      --text: #f7f7ff;
+      --muted: #b4b6c7;
+      --border: rgba(255,255,255,0.08);
+    }
+
+    /* LIGHT MODE VARIABLES */
+    :root.light {
+      --bg: #ffffff;
+      --card: #f5f5ff;
+      --text: #1b1b1f;
+      --muted: #56566b;
+      --border: rgba(0,0,0,0.12);
+    }
+
+    /* ========= PAGE LAYOUT ========= */
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    body {
+      font-family: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+      background: var(--bg);
+      color: var(--text);
+      min-height: 100vh;
+      padding: 2rem 1rem;
+      display: flex;
+      justify-content: center;
+      transition: background 0.4s ease, color 0.4s ease;
+    }
+
+    main {
+      width: 100%;
+      max-width: 980px;
+      background: var(--card);
+      border-radius: 16px;
+      padding: 2rem 1.6rem 2.8rem;
+      border: 1px solid var(--border);
+      box-shadow: 0 16px 40px rgba(0,0,0,0.4);
+      transition: background 0.4s ease, border 0.4s ease;
+    }
+
+    /* ========= HEADER ========= */
+    header {
+      margin-bottom: 1rem;
+      position: relative;
+    }
+
+    h1 {
+      font-size: 1.7rem;
+      letter-spacing: 0.03em;
+      margin-bottom: 0.3rem;
+    }
+
+    h1 span {
+      background: linear-gradient(110deg, var(--accent1), var(--accent2));
+      -webkit-background-clip: text;
+      color: transparent;
+    }
+
+    header p {
+      font-size: 0.92rem;
+      color: var(--muted);
+      max-width: 420px;
+      line-height: 1.35;
+    }
+
+    /* ========= TOGGLE BUTTON ========= */
+    .theme-toggle {
+      position: absolute;
+      top: 0;
+      right: 0;
+      background: none;
+      border: none;
+      cursor: pointer;
+      font-size: 1.4rem;
+      padding: 0.35rem;
+      border-radius: 50%;
+      color: var(--text);
+      transition: background 0.2s, color 0.4s ease;
+    }
+
+    .theme-toggle:hover {
+      background: rgba(255,255,255,0.1);
+    }
+
+    /* ========= SECTIONS ========= */
+    .section-title {
+      color: var(--muted);
+      text-transform: uppercase;
+      font-size: 0.8rem;
+      letter-spacing: 0.14em;
+      margin: 1.6rem 0 0.6rem;
+    }
+
+    .grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(230px, 1fr));
+      gap: 0.85rem;
+    }
+
+    /* ========= CARDS ========= */
+    .card {
+      background: var(--card);
+      border-radius: 12px;
+      padding: 0.9rem 1rem;
+      border: 1px solid var(--border);
+      transition: transform 0.15s ease, border-color 0.2s ease, background 0.4s ease;
+    }
+
+    .card:hover {
+      transform: translateY(-2px);
+      border-color: var(--accent1);
+    }
+
+    .tag {
+      font-size: 0.72rem;
+      text-transform: uppercase;
+      color: var(--accent2);
+      letter-spacing: 0.12em;
+      margin-bottom: 0.25rem;
+      display: block;
+    }
+
+    .card a {
+      text-decoration: none;
+      color: var(--text);
+      font-size: 1rem;
+      font-weight: 600;
+      transition: color 0.4s ease;
+    }
+
+    .card p {
+      margin-top: 0.25rem;
+      font-size: 0.82rem;
+      line-height: 1.32;
+      color: var(--muted);
+    }
+
+    /* ========= FOOTER ========= */
+    footer {
+      margin-top: 2.4rem;
+      font-size: 0.75rem;
+      color: var(--muted);
+      display: flex;
+      justify-content: space-between;
+      flex-wrap: wrap;
+      gap: 0.6rem;
+    }
+  </style>
+</head>
+
+<body>
+  <main>
+
+    <header>
+      <h1><span>Official Sharon Crady</span> — Sites Portal</h1>
+      <p>Your unified launchpad for business, studio, aviation, homeschooling, and future Southwest life.</p>
+
+      <!-- Toggle button -->
+      <button class="theme-toggle" id="themeToggle" aria-label="Toggle Light/Dark Mode">🌙</button>
+    </header>
+
+    <!-- ================= SECTIONS ================= -->
+
+    <div class="section-title">Core Brand & Business</div>
+    <div class="grid">
+      <div class="card">
+        <div class="tag">Brand HQ</div>
+        <a href="#" target="_blank">Official Sharon Crady™ — Main Site</a>
+        <p>Your central identity hub — all divisions and offerings live here.</p>
+      </div>
+
+      <div class="card">
+        <div class="tag">Products</div>
+        <a href="#" target="_blank">Official Sharon Crady Products</a>
+        <p>Your wellness products, printables, merch, and digital items.</p>
+      </div>
+
+      <div class="card">
+        <div class="tag">Publishing</div>
+        <a href="#" target="_blank">Publishing Division</a>
+        <p>Books, eBooks, journals, mantras, and your future catalogue.</p>
+      </div>
+    </div>
+
+    <div class="section-title">Studio • Voiceover • Music</div>
+    <div class="grid">
+      <div class="card">
+        <div class="tag">Voiceover</div>
+        <a href="#" target="_blank">VO Demos & Casting Portals</a>
+        <p>Your demo reels, casting profiles, and submission sites.</p>
+      </div>
+
+      <div class="card">
+        <div class="tag">YouTube</div>
+        <a href="#" target="_blank">YouTube — Official Sharon Crady</a>
+        <p>Talk-show videos, singing, livestreams, behind-the-scenes.</p>
+      </div>
+
+      <div class="card">
+        <div class="tag">Music</div>
+        <a href="#" target="_blank">Music & Songwriting Hub</a>
+        <p>Songs, drafts, mixes — everything you create in your studio.</p>
+      </div>
+    </div>
+
+    <div class="section-title">Aviation & Southwest Life</div>
+    <div class="grid">
+      <div class="card">
+        <div class="tag">Aviation</div>
+        <a href="#" target="_blank">Pilot Journey Tracker</a>
+        <p>Scholarships, flight school notes, drone license, PPL planning.</p>
+      </div>
+
+      <div class="card">
+        <div class="tag">Southwest</div>
+        <a href="#" target="_blank">AZ / SoCal Vision Board</a>
+        <p>Your move plans, future life, desert ranch, and home visions.</p>
+      </div>
+    </div>
+
+    <div class="section-title">Homeschool & Family</div>
+    <div class="grid">
+      <div class="card">
+        <div class="tag">Homeschool</div>
+        <a href="#" target="_blank">Trevor’s Homeschool Portal</a>
+        <p>Coding, game dev, language arts, OneNote, and curriculum links.</p>
+      </div>
+
+      <div class="card">
+        <div class="tag">Control Room</div>
+        <a href="#" target="_blank">Docs, Sheets & Master Systems</a>
+        <p>Your personal HQ — spreadsheets, trackers, workflows, archives.</p>
+      </div>
+    </div>
+
+    <footer>
+      <span>Update this page as new worlds go live.</span>
+      <span>Version: November 2025</span>
+    </footer>
+
+  </main>
+
+  <script>
+    const toggle = document.getElementById("themeToggle");
+    const root = document.documentElement;
+
+    toggle.addEventListener("click", () => {
+      root.classList.toggle("light");
+      toggle.textContent = root.classList.contains("light") ? "☀️" : "🌙";
+    });
+  </script>
+</body>
+</html>
